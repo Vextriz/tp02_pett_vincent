@@ -1,0 +1,7 @@
+{
+    "server": {
+      "baseDir": "./dist/tp2/browser"
+    },
+    "files": ["./dist/tp2/browser/**/*.{html,htm,css,js}"]
+  }
+  

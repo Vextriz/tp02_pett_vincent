@@ -1,0 +1,101 @@
+<section id="form" class="container mt-5">
+  <h2 class="mb-4">Créer un compte client</h2>
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+          <label for="civilite">Civilité :</label>
+          <select formControlName="civilite" class="form-control" required>
+              <option value="">Sélectionnez</option>
+              <option value="Monsieur">Monsieur</option>
+              <option value="Madame">Madame</option>
+          </select>
+          <div *ngIf="clientForm.get('civilite')?.invalid && clientForm.get('civilite')?.touched" class="invalid-feedback d-block">
+              Veuillez sélectionner votre civilité.
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="nom">Nom :</label>
+          <input type="text" formControlName="nom" class="form-control" required pattern="[A-Za-zÀ-ÿ\s'-]+" />
+          <div *ngIf="clientForm.get('nom')?.invalid && clientForm.get('nom')?.touched" class="invalid-feedback d-block">
+              Veuillez entrer un nom valide.
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="prenom">Prénom :</label>
+          <input type="text" formControlName="prenom" class="form-control" required pattern="[A-Za-zÀ-ÿ\s'-]+" />
+          <div *ngIf="clientForm.get('prenom')?.invalid && clientForm.get('prenom')?.touched" class="invalid-feedback d-block">
+              Veuillez entrer un prénom valide.
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="adresse">Adresse :</label>
+          <input type="text" formControlName="adresse" class="form-control" required />
+          <div *ngIf="clientForm.get('adresse')?.invalid && clientForm.get('adresse')?.touched" class="invalid-feedback d-block">
+              Veuillez entrer une adresse valide.
+          </div>
+      </div>
+
+      <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="cp">Code Postal :</label>
+              <input type="text" formControlName="cp" class="form-control" required pattern="\d{5}" />
+              <div *ngIf="clientForm.get('cp')?.invalid && clientForm.get('cp')?.touched" class="invalid-feedback d-block">
+                  Veuillez entrer un code postal valide (5 chiffres).
+              </div>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="ville">Ville :</label>
+              <input type="text" formControlName="ville" class="form-control" required pattern="[A-Za-zÀ-ÿ\s'-]+" />
+              <div *ngIf="clientForm.get('ville')?.invalid && clientForm.get('ville')?.touched" class="invalid-feedback d-block">
+                  Veuillez entrer une ville valide.
+              </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="tel">Téléphone :</label>
+          <input type="tel" formControlName="tel" class="form-control" required pattern="\d{10}" />
+          <div *ngIf="clientForm.get('tel')?.invalid && clientForm.get('tel')?.touched" class="invalid-feedback d-block">
+              Veuillez entrer un numéro de téléphone valide (10 chiffres).
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="email">Email :</label>
+          <input type="email" formControlName="email" class="form-control" required />
+          <div *ngIf="clientForm.get('email')?.invalid && clientForm.get('email')?.touched" class="invalid-feedback d-block">
+              Veuillez entrer une adresse email valide.
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="login">Login :</label>
+          <input type="text" formControlName="login" class="form-control" required pattern="[A-Za-z0-9]{5,}" />
+          <div *ngIf="clientForm.get('login')?.invalid && clientForm.get('login')?.touched" class="invalid-feedback d-block">
+              Veuillez entrer un login valide (au moins 5 caractères alphanumériques).
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="password">Mot de passe :</label>
+          <input type="password" formControlName="password" class="form-control" required minlength="8" />
+          <div *ngIf="clientForm.get('password')?.invalid && clientForm.get('password')?.touched" class="invalid-feedback d-block">
+              Le mot de passe doit contenir au moins 8 caractères.
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="confirm_password">Confirmation du mot de passe :</label>
+          <input type="password" formControlName="confirm_password" class="form-control" required />
+          <div *ngIf="clientForm.hasError('mismatch') && clientForm.get('confirm_password')?.touched" class="invalid-feedback d-block">
+              Les mots de passe ne correspondent pas.
+          </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="clientForm.invalid">Créer le compte</button>
+
+      <app-summary *ngIf="submittedData" [customerData]="submittedData"></app-summary>
+        </form>
+</section>
